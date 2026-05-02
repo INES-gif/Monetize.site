@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oussaifi Ines — Luxury Designer · Earn Per Click</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A96E;
+  --gold2: #E8D5B0;
+  --black: #080807;
+  --dark: #111110;
+  --card: #181816;
+  --card2: #201F1C;
+  --border: rgba(201,169,110,0.18);
+  --muted: #6B6860;
+  --cream: #F0EBE0;
+  --green: #4CAF7D;
+  --red: #E05C5C;
+  --blue: #5B9BD5;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--cream);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(201,169,110,0.07),transparent);pointer-events:none;z-index:0}
+
+/* ── FLOATING EARNINGS BADGE ── */
+.earn-badge{
+  position:fixed;top:20px;right:20px;z-index:9999;
+  background:linear-gradient(135deg,#1a1a16,#252520);
+  border:1px solid var(--gold);
+  border-radius:12px;padding:12px 20px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 0 1px rgba(201,169,110,0.1);
+  backdrop-filter:blur(12px);
+  cursor:pointer;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.earn-badge:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.7),0 0 20px rgba(201,169,110,0.15)}
+.earn-badge .pulse{width:8px;height:8px;border-radius:50%;background:var(--green);position:relative;flex-shrink:0}
+.earn-badge .pulse::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--green);animation:pulse 1.5s infinite;opacity:0}
+@keyframes pulse{0%{transform:scale(1);opacity:0.8}100%{transform:scale(2);opacity:0}}
+.earn-badge .earn-label{font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:2px}
+.earn-badge .earn-total{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);font-weight:400;line-height:1}
+.earn-badge .earn-session{font-size:0.5rem;color:var(--green);letter-spacing:0.1em;margin-top:2px}
+
+/* ── HEADER ── */
+header{position:relative;z-index:10;padding:80px 60px 60px;text-align:center}
+.header-eyebrow{font-size:0.55rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;justify-content:center;gap:16px}
+.header-eyebrow::before,.header-eyebrow::after{content:'';flex:1;max-width:60px;height:1px;background:var(--border)}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:300;line-height:1.05;margin-bottom:16px}
+h1 em{font-style:italic;color:var(--gold)}
+.header-sub{font-size:0.7rem;letter-spacing:0.12em;color:var(--muted);max-width:500px;margin:0 auto 40px;line-height:1.9}
+.header-live{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border:1px solid rgba(76,175,125,0.4);border-radius:20px;font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--green)}
+.header-live span{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite}
+
+/* ── EARNINGS DASHBOARD ── */
+.dashboard{padding:40px 60px;display:grid;grid-template-columns:repeat(5,1fr);gap:3px;background:var(--border);position:relative;z-index:2}
+.dash-card{background:var(--card);padding:28px 24px;text-align:center;transition:background 0.3s}
+.dash-card:hover{background:var(--card2)}
+.dash-icon{font-size:1.4rem;margin-bottom:12px;display:block}
+.dash-value{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);font-weight:300;display:block;line-height:1;margin-bottom:6px}
+.dash-label{font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted)}
+.dash-change{font-size:0.6rem;color:var(--green);margin-top:6px;display:block}
+
+/* ── SECTION ── */
+section{padding:80px 60px;position:relative;z-index:2}
+.sec-tag{font-size:0.5rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:12px}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;margin-bottom:40px}
+h2 em{font-style:italic;color:var(--gold)}
+
+/* ── REVENUE STREAMS ── */
+.streams-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--border)}
+.stream-card{background:var(--card);padding:48px 36px;position:relative;overflow:hidden;transition:background 0.3s,transform 0.2s;cursor:pointer}
+.stream-card:hover{background:var(--card2)}
+.stream-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);transform:scaleX(0);transform-origin:left;transition:transform 0.4s}
+.stream-card:hover::after{transform:scaleX(1)}
+.stream-num{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;color:rgba(201,169,110,0.07);position:absolute;top:10px;right:20px;line-height:1;pointer-events:none}
+.stream-icon{font-size:1.8rem;margin-bottom:20px;display:block}
+.stream-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;margin-bottom:12px;color:var(--cream)}
+.stream-desc{font-size:0.68rem;line-height:1.9;color:var(--muted);margin-bottom:24px}
+.stream-rate{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--border);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.stream-btn{display:block;width:100%;padding:13px;background:transparent;border:1px solid var(--border);font-family:'Montserrat',sans-serif;font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--cream);cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden}
+.stream-btn::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-101%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1)}
+.stream-btn:hover::before{transform:translateX(0)}
+.stream-btn span{position:relative;z-index:1;transition:color 0.35s}
+.stream-btn:hover span{color:var(--black)}
+
+/* ── CLICK TO EARN ZONE ── */
+.earn-zone{background:var(--dark);padding:80px 60px;text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.earn-zone-inner{max-width:700px;margin:0 auto}
+.click-counter{font-family:'Cormorant Garamond',serif;font-size:6rem;color:var(--gold);line-height:1;display:block;margin-bottom:8px;transition:transform 0.1s}
+.click-counter.pop{transform:scale(1.08)}
+.click-label{font-size:0.6rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--muted);margin-bottom:40px;display:block}
+.big-click-btn{position:relative;width:200px;height:200px;border-radius:50%;background:linear-gradient(135deg,#1a1815,#252218);border:2px solid var(--gold);cursor:pointer;margin:0 auto 48px;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 0 0 0 rgba(201,169,110,0.4),inset 0 0 40px rgba(201,169,110,0.05)}
+.big-click-btn:hover{transform:scale(1.04);box-shadow:0 0 40px rgba(201,169,110,0.25),inset 0 0 40px rgba(201,169,110,0.08)}
+.big-click-btn:active{transform:scale(0.96)}
+.big-click-btn .btn-icon{font-size:2.5rem;margin-bottom:6px;display:block}
+.big-click-btn .btn-text{font-size:0.55rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold)}
+.big-click-btn .btn-earn{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold2);margin-top:4px}
+.ripple-container{position:absolute;inset:0;border-radius:50%;overflow:hidden;pointer-events:none}
+.ripple{position:absolute;border-radius:50%;background:rgba(201,169,110,0.3);transform:scale(0);animation:rippleAnim 0.6s linear forwards}
+@keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+.earn-progress-wrap{margin:0 auto 30px;max-width:420px}
+.earn-progress-labels{display:flex;justify-content:space-between;font-size:0.55rem;letter-spacing:0.15em;color:var(--muted);margin-bottom:8px}
+.earn-progress-bar{height:3px;background:rgba(201,169,110,0.1);border-radius:2px;overflow:hidden}
+.earn-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));width:0%;transition:width 0.4s cubic-bezier(0.4,0,0.2,1);border-radius:2px}
+.click-milestones{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.milestone{padding:7px 16px;border:1px solid var(--border);font-size:0.55rem;letter-spacing:0.15em;color:var(--muted);transition:all 0.3s;border-radius:2px}
+.milestone.achieved{border-color:var(--gold);color:var(--gold);background:rgba(201,169,110,0.08)}
+
+/* ── FLOATING COIN ANIMATION ── */
+.coin-float{position:fixed;pointer-events:none;font-size:1.4rem;z-index:9990;animation:coinUp 1.2s ease-out forwards}
+@keyframes coinUp{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(0.6)}}
+
+/* ── AD REVENUE ZONE ── */
+.ad-zone{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start}
+.ad-sidebar{display:flex;flex-direction:column;gap:20px}
+.ad-unit{background:var(--card);border:1px solid var(--border);padding:20px;cursor:pointer;transition:border-color 0.3s,background 0.3s;position:relative;overflow:hidden}
+.ad-unit:hover{border-color:var(--gold);background:var(--card2)}
+.ad-unit-tag{font-size:0.45rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.ad-unit-tag::before{content:'AD';font-size:0.4rem;padding:2px 5px;border:1px solid var(--border);color:var(--muted)}
+.ad-unit-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--cream);margin-bottom:6px}
+.ad-unit-sub{font-size:0.6rem;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.ad-unit-cta{font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:6px}
+.ad-unit-cta::after{content:'→';transition:transform 0.3s}
+.ad-unit:hover .ad-unit-cta::after{transform:translateX(4px)}
+.ad-earn-badge{position:absolute;top:12px;right:12px;background:rgba(76,175,125,0.15);border:1px solid rgba(76,175,125,0.3);padding:3px 8px;font-size:0.45rem;letter-spacing:0.2em;color:var(--green)}
+
+.ad-main{display:flex;flex-direction:column;gap:20px}
+.ad-banner{background:var(--card);border:1px solid var(--border);padding:36px;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden}
+.ad-banner:hover{border-color:var(--gold);background:var(--card2)}
+.ad-banner-inner{display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px}
+.ad-banner-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:8px}
+.ad-banner-sub{font-size:0.68rem;color:var(--muted);line-height:1.7;margin-bottom:18px}
+.ad-banner-cta-btn{padding:12px 30px;background:var(--gold);color:var(--black);font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;border:none;font-family:'Montserrat',sans-serif;cursor:pointer;transition:background 0.3s;font-weight:500}
+.ad-banner-cta-btn:hover{background:var(--gold2)}
+.ad-banner-visual{width:120px;height:120px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:3rem;flex-shrink:0}
+.ad-banner-tag{position:absolute;top:0;left:0;background:var(--gold);color:var(--black);font-size:0.45rem;letter-spacing:0.3em;padding:4px 12px;text-transform:uppercase}
+
+/* ── AFFILIATE TABLE ── */
+.affiliate-table{width:100%;border-collapse:collapse;background:var(--card)}
+.affiliate-table th{padding:16px 20px;font-size:0.5rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--muted);text-align:left;border-bottom:1px solid var(--border);font-weight:400}
+.affiliate-table td{padding:16px 20px;font-size:0.72rem;border-bottom:1px solid rgba(201,169,110,0.06);color:var(--cream);vertical-align:middle}
+.affiliate-table tr:last-child td{border-bottom:none}
+.affiliate-table tr:hover td{background:var(--card2)}
+.aff-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400}
+.aff-rate{color:var(--gold);font-weight:500}
+.aff-btn{padding:7px 18px;background:transparent;border:1px solid var(--border);font-size:0.5rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--cream);cursor:pointer;transition:all 0.3s;font-family:'Montserrat',sans-serif}
+.aff-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--black)}
+.tag-hot{padding:3px 8px;background:rgba(224,92,92,0.15);border:1px solid rgba(224,92,92,0.3);font-size:0.45rem;letter-spacing:0.2em;color:var(--red);text-transform:uppercase}
+.tag-new{padding:3px 8px;background:rgba(76,175,125,0.12);border:1px solid rgba(76,175,125,0.3);font-size:0.45rem;letter-spacing:0.2em;color:var(--green);text-transform:uppercase}
+
+/* ── PORTFOLIO CLICKABLE ── */
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--border)}
+.p-item{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer;background:var(--card)}
+.p-item img{width:100%;height:100%;object-fit:cover;filter:brightness(0.7) saturate(0.8);transition:transform 0.7s,filter 0.5s}
+.p-item:hover img{transform:scale(1.08);filter:brightness(0.9) saturate(1)}
+.p-item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,7,0.95) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px;opacity:0;transition:opacity 0.35s}
+.p-item:hover .p-item-overlay{opacity:1}
+.p-brand{font-size:0.5rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.p-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:12px}
+.p-earn-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:var(--gold);color:var(--black);font-size:0.5rem;letter-spacing:0.25em;text-transform:uppercase;border:none;font-family:'Montserrat',sans-serif;cursor:pointer;transition:background 0.3s;font-weight:500}
+.p-earn-btn:hover{background:var(--gold2)}
+.p-earn-badge{position:absolute;top:14px;right:14px;background:rgba(201,169,110,0.9);color:var(--black);font-size:0.5rem;letter-spacing:0.2em;padding:4px 10px;text-transform:uppercase;font-weight:500;opacity:0;transition:opacity 0.3s}
+.p-item:hover .p-earn-badge{opacity:1}
+
+/* ── CONTACT CTA ── */
+.contact-cta{background:linear-gradient(135deg,#141310,#1e1c17);border:1px solid var(--border);padding:80px 60px;text-align:center;position:relative;overflow:hidden}
+.contact-cta::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:400px;height:400px;background:radial-gradient(circle,rgba(201,169,110,0.06),transparent 70%);pointer-events:none}
+.cta-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;margin-bottom:16px}
+.cta-h em{font-style:italic;color:var(--gold)}
+.cta-sub{font-size:0.7rem;color:var(--muted);letter-spacing:0.1em;margin-bottom:48px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.8}
+.cta-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.cta-btn-gold{padding:18px 48px;background:var(--gold);color:var(--black);font-size:0.6rem;letter-spacing:0.35em;text-transform:uppercase;border:none;font-family:'Montserrat',sans-serif;cursor:pointer;font-weight:500;transition:all 0.3s}
+.cta-btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
+.cta-btn-outline{padding:18px 48px;background:transparent;border:1px solid var(--border);color:var(--cream);font-size:0.6rem;letter-spacing:0.35em;text-transform:uppercase;font-family:'Montserrat',sans-serif;cursor:pointer;transition:all 0.3s}
+.cta-btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.cta-earning-note{margin-top:32px;font-size:0.6rem;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:8px}
+.cta-earning-note strong{color:var(--gold)}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);padding:40px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:0.25em;color:var(--gold)}
+.footer-links{display:flex;gap:30px}
+.footer-links a{font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-size:0.55rem;color:var(--muted)}
+
+/* ── TOAST NOTIFICATION ── */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(135deg,#1a1a16,#252520);border:1px solid var(--gold);padding:14px 28px;font-size:0.65rem;letter-spacing:0.15em;color:var(--cream);z-index:9999;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1),opacity 0.4s;opacity:0;border-radius:4px;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast .t-earn{color:var(--gold);font-weight:600}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .earn-badge{top:10px;right:10px;padding:8px 14px}
+  header{padding:80px 24px 40px}
+  .dashboard{grid-template-columns:repeat(3,1fr);padding:0}
+  section{padding:60px 24px}
+  .streams-grid,.portfolio-grid{grid-template-columns:1fr}
+  .ad-zone{grid-template-columns:1fr}
+  .cta-actions{flex-direction:column;align-items:center}
+  footer{flex-direction:column;align-items:flex-start;padding:30px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- Floating Earnings Badge -->
+<div class="earn-badge" onclick="showDashboard()">
+  <div class="pulse"></div>
+  <div>
+    <span class="earn-label">Total Earned</span>
+    <span class="earn-total" id="badgeTotal">$0.00</span>
+    <span class="earn-session" id="sessionClicks">+0 clicks this session</span>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-eyebrow">Oussaifi Ines · Luxury Visual Designer</div>
+  <h1>Earn While You<br><em>Explore</em> My World</h1>
+  <p class="header-sub">Every click, every interaction, every project inquiry — this portfolio is a fully monetized experience. Your engagement generates real revenue.</p>
+  <div class="header-live"><span></span> Live Earnings · 100% Monetized Portfolio</div>
+</header>
+
+<!-- EARNINGS DASHBOARD -->
+<div class="dashboard reveal">
+  <div class="dash-card">
+    <span class="dash-icon">💰</span>
+    <span class="dash-value" id="d-total">$0.00</span>
+    <span class="dash-label">Total Earned</span>
+    <span class="dash-change" id="d-change">+$0.00 today</span>
+  </div>
+  <div class="dash-card">
+    <span class="dash-icon">🖱️</span>
+    <span class="dash-value" id="d-clicks">0</span>
+    <span class="dash-label">Total Clicks</span>
+    <span class="dash-change" id="d-cpc">$0.05 / click avg</span>
+  </div>
+  <div class="dash-card">
+    <span class="dash-icon">📋</span>
+    <span class="dash-value" id="d-leads">0</span>
+    <span class="dash-label">Project Leads</span>
+    <span class="dash-change">$50 per qualified lead</span>
+  </div>
+  <div class="dash-card">
+    <span class="dash-icon">🔗</span>
+    <span class="dash-value" id="d-aff">$0.00</span>
+    <span class="dash-label">Affiliate Revenue</span>
+    <span class="dash-change">Up to 30% commission</span>
+  </div>
+  <div class="dash-card">
+    <span class="dash-icon">👁️</span>
+    <span class="dash-value" id="d-views">1</span>
+    <span class="dash-label">Page Views</span>
+    <span class="dash-change">$0.002 per view</span>
+  </div>
+</div>
+
+<!-- REVENUE STREAMS -->
+<section id="streams">
+  <span class="sec-tag">How You Earn</span>
+  <h2>6 Active <em>Revenue Streams</em></h2>
+  <div class="streams-grid reveal">
+
+    <div class="stream-card" onclick="earn(0.05,'💰 Ad Click +$0.05')">
+      <div class="stream-num">01</div>
+      <span class="stream-icon">🖱️</span>
+      <h3 class="stream-title">Pay Per Click Ads</h3>
+      <p class="stream-desc">Google AdSense, Media.net, and Ezoic display ads are embedded across the portfolio. Each visitor click generates revenue — optimized for luxury audience CPM.</p>
+      <div class="stream-rate">$0.03 – $0.15 per click</div>
+      <button class="stream-btn" onclick="event.stopPropagation();earn(0.08,'🖱️ Ad Revenue +$0.08')"><span>Simulate Ad Click</span></button>
+    </div>
+
+    <div class="stream-card" onclick="earn(15,'📋 Lead Captured +$15.00')">
+      <div class="stream-num">02</div>
+      <span class="stream-icon">📋</span>
+      <h3 class="stream-title">Project Leads</h3>
+      <p class="stream-desc">Every qualified project inquiry submitted converts to a paid project. Average project value $500–$4,000. Each lead form submission earns immediately.</p>
+      <div class="stream-rate">$15 – $50 per lead</div>
+      <button class="stream-btn" onclick="event.stopPropagation();earn(50,'📋 Hot Lead +$50.00');addLead()"><span>Submit Inquiry ($50)</span></button>
+    </div>
+
+    <div class="stream-card" onclick="earn(0.12,'🔗 Affiliate Click +$0.12')">
+      <div class="stream-num">03</div>
+      <span class="stream-icon">🔗</span>
+      <h3 class="stream-title">Affiliate Marketing</h3>
+      <p class="stream-desc">Curated affiliate links to Canva Pro, Adobe Creative Cloud, 3D software, and luxury design resources — earning commissions on every signup and purchase.</p>
+      <div class="stream-rate">10% – 30% commission</div>
+      <button class="stream-btn" onclick="event.stopPropagation();earn(0.30,'🔗 Affiliate Earn +$0.30');addAffiliate(0.30)"><span>Click Affiliate Link</span></button>
+    </div>
+
+    <div class="stream-card" onclick="earn(0.002,'👁️ View Revenue +$0.002')">
+      <div class="stream-num">04</div>
+      <span class="stream-icon">👁️</span>
+      <h3 class="stream-title">Display Advertising</h3>
+      <p class="stream-desc">CPM display ads run passively in the background. High-CPM luxury audience commands premium rates — earning on every 1,000 impressions served.</p>
+      <div class="stream-rate">$2 – $8 per 1,000 views</div>
+      <button class="stream-btn" onclick="event.stopPropagation();earn(0.008,'👁️ Impression +$0.008')"><span>Trigger Impression</span></button>
+    </div>
+
+    <div class="stream-card" onclick="earn(250,'🎨 Service Booked +$250')">
+      <div class="stream-num">05</div>
+      <span class="stream-icon">🎨</span>
+      <h3 class="stream-title">Direct Services</h3>
+      <p class="stream-desc">Freelance design projects booked directly through the portfolio — 3D visualization, creative direction, AI design, and interior concepts priced at market premium.</p>
+      <div class="stream-rate">$500 – $4,000 per project</div>
+      <button class="stream-btn" onclick="event.stopPropagation();earn(500,'🎨 Project Booked +$500.00');addLead()"><span>Book a Project</span></button>
+    </div>
+
+    <div class="stream-card" onclick="earn(5,'⭐ Premium Content +$5.00')">
+      <div class="stream-num">06</div>
+      <span class="stream-icon">⭐</span>
+      <h3 class="stream-title">Digital Products</h3>
+      <p class="stream-desc">Sell design templates, mood board packs, 3D asset bundles, and luxury brand guides as digital downloads — passive income that earns 24/7 without your time.</p>
+      <div class="stream-rate">$5 – $120 per download</div>
+      <button class="stream-btn" onclick="event.stopPropagation();earn(29,'⭐ Template Sold +$29.00')"><span>Buy Template ($29)</span></button>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLICK TO EARN ZONE -->
+<div class="earn-zone">
+  <div class="earn-zone-inner">
+    <span class="sec-tag" style="text-align:center;display:block;margin-bottom:16px">Interactive Earn Zone</span>
+    <h2 style="text-align:center;margin-bottom:8px">Click. <em>Earn.</em> Repeat.</h2>
+    <p style="font-size:0.68rem;color:var(--muted);letter-spacing:0.08em;margin-bottom:40px;line-height:1.8">Each click simulates an ad interaction, portfolio view, or engagement metric — all of which convert to real revenue on a live site.</p>
+
+    <span class="click-counter" id="clickNum">0</span>
+    <span class="click-label">Total Clicks · $<span id="clickEarn">0.00</span> Earned</span>
+
+    <button class="big-click-btn" id="bigBtn" onclick="bigClick(event)">
+      <div class="ripple-container" id="rippleCont"></div>
+      <span class="btn-icon">✦</span>
+      <span class="btn-text">Click to Earn</span>
+      <span class="btn-earn">+$0.05 per click</span>
+    </button>
+
+    <div class="earn-progress-wrap">
+      <div class="earn-progress-labels">
+        <span>Progress to next milestone</span>
+        <span id="progLabel">0 / 10 clicks</span>
+      </div>
+      <div class="earn-progress-bar">
+        <div class="earn-progress-fill" id="progFill"></div>
+      </div>
+    </div>
+
+    <div class="click-milestones">
+      <div class="milestone" id="ms10">🎯 10 clicks · $0.50</div>
+      <div class="milestone" id="ms25">⚡ 25 clicks · $1.25</div>
+      <div class="milestone" id="ms50">💎 50 clicks · $2.50</div>
+      <div class="milestone" id="ms100">👑 100 clicks · $5.00</div>
+    </div>
+  </div>
+</div>
+
+<!-- PORTFOLIO WITH EARN BUTTONS -->
+<section id="portfolio" style="background:var(--dark)">
+  <span class="sec-tag">Portfolio · Earn Per View</span>
+  <h2>Selected <em>Work</em> · Click to Engage</h2>
+  <div class="portfolio-grid reveal">
+    <div class="p-item" onclick="earn(0.06,'👁️ Portfolio View +$0.06')">
+      <img src="https://mir-s3-cdn-cf.behance.net/projects/404/b58de5245965541.Y3JvcCwxMDI0LDgwMCwwLDExMQ.jpeg" alt="Dior">
+      <div class="p-earn-badge">+$0.06</div>
+      <div class="p-item-overlay">
+        <div class="p-brand">Dior</div>
+        <div class="p-name">Fashion Show Event</div>
+        <button class="p-earn-btn" onclick="event.stopPropagation();earn(0.12,'👁️ Project View +$0.12')">View Project · +$0.12</button>
+      </div>
+    </div>
+    <div class="p-item" onclick="earn(0.06,'👁️ Portfolio View +$0.06')">
+      <img src="https://mir-s3-cdn-cf.behance.net/projects/404/74a739242487129.Y3JvcCwxMDI0LDgwMCwwLDExMQ.jpeg" alt="Louis Vuitton">
+      <div class="p-earn-badge">+$0.06</div>
+      <div class="p-item-overlay">
+        <div class="p-brand">Louis Vuitton</div>
+        <div class="p-name">Concept Store</div>
+        <button class="p-earn-btn" onclick="event.stopPropagation();earn(0.12,'👁️ Project View +$0.12')">View Project · +$0.12</button>
+      </div>
+    </div>
+    <div class="p-item" onclick="earn(0.06,'👁️ Portfolio View +$0.06')">
+      <img src="https://mir-s3-cdn-cf.behance.net/projects/404/07c5f8240629121.Y3JvcCwxMDI0LDgwMCwwLDExMQ.jpeg" alt="Hermès">
+      <div class="p-earn-badge">+$0.06</div>
+      <div class="p-item-overlay">
+        <div class="p-brand">Hermès</div>
+        <div class="p-name">Paris Museum</div>
+        <button class="p-earn-btn" onclick="event.stopPropagation();earn(0.12,'👁️ Project View +$0.12')">View Project · +$0.12</button>
+      </div>
+    </div>
+    <div class="p-item" onclick="earn(0.06,'👁️ Portfolio View +$0.06')">
+      <img src="https://mir-s3-cdn-cf.behance.net/projects/404/d3dcf0233183683.Y3JvcCwxMzI4LDEwMzgsMCwxNDQ.jpeg" alt="Bvlgari">
+      <div class="p-earn-badge">+$0.06</div>
+      <div class="p-item-overlay">
+        <div class="p-brand">Bvlgari</div>
+        <div class="p-name">Hotel & Resort</div>
+        <button class="p-earn-btn" onclick="event.stopPropagation();earn(0.12,'👁️ Project View +$0.12')">View Project · +$0.12</button>
+      </div>
+    </div>
+    <div class="p-item" onclick="earn(0.06,'👁️ Portfolio View +$0.06')">
+      <img src="https://mir-s3-cdn-cf.behance.net/projects/404/87b65f234673153.Y3JvcCwxMDI0LDgwMCwwLDExMQ.jpg" alt="Fendi">
+      <div class="p-earn-badge">+$0.06</div>
+      <div class="p-item-overlay">
+        <div class="p-brand">Fendi</div>
+        <div class="p-name">Fashion Show</div>
+        <button class="p-earn-btn" onclick="event.stopPropagation();earn(0.12,'👁️ Project View +$0.12')">View Project · +$0.12</button>
+      </div>
+    </div>
+    <div class="p-item" onclick="earn(0.06,'👁️ Portfolio View +$0.06')">
+      <img src="https://mir-s3-cdn-cf.behance.net/projects/404/e78e31232895881.Y3JvcCwxMzI4LDEwMzgsMCwxNDQ.jpeg" alt="Dioriviera">
+      <div class="p-earn-badge">+$0.06</div>
+      <div class="p-item-overlay">
+        <div class="p-brand">Dior</div>
+        <div class="p-name">Dioriviera Summer Club</div>
+        <button class="p-earn-btn" onclick="event.stopPropagation();earn(0.12,'👁️ Project View +$0.12')">View Project · +$0.12</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AD REVENUE ZONE -->
+<section id="ads">
+  <span class="sec-tag">Ad Revenue Zone</span>
+  <h2>Monetized <em>Ad Placements</em></h2>
+  <div class="ad-zone reveal">
+    <div class="ad-main">
+      <div class="ad-banner" onclick="earn(0.15,'🏆 Premium Ad Click +$0.15')">
+        <div class="ad-banner-tag">SPONSORED · +$0.15 per click</div>
+        <div class="ad-banner-inner" style="margin-top:16px">
+          <div>
+            <h3 class="ad-banner-title">Canva Pro for Designers</h3>
+            <p class="ad-banner-sub">Professional design tools for luxury creatives. Access thousands of premium templates, brand kits, and advanced AI design features used by top creative directors worldwide.</p>
+            <button class="ad-banner-cta-btn" onclick="event.stopPropagation();earn(0.15,'🏆 Ad Click +$0.15')">Try Canva Pro Free →</button>
+          </div>
+          <div class="ad-banner-visual">🎨</div>
+        </div>
+      </div>
+      <div class="ad-banner" onclick="earn(0.12,'📐 Ad Click +$0.12')">
+        <div class="ad-banner-tag">SPONSORED · +$0.12 per click</div>
+        <div class="ad-banner-inner" style="margin-top:16px">
+          <div>
+            <h3 class="ad-banner-title">Adobe Creative Cloud</h3>
+            <p class="ad-banner-sub">The complete creative suite for luxury visual designers — Photoshop, Illustrator, After Effects, and 20+ professional apps in one subscription.</p>
+            <button class="ad-banner-cta-btn" onclick="event.stopPropagation();earn(0.12,'📐 Ad Click +$0.12')">Start Free Trial →</button>
+          </div>
+          <div class="ad-banner-visual">🅐</div>
+        </div>
+      </div>
+    </div>
+    <div class="ad-sidebar">
+      <div class="ad-unit" onclick="earn(0.08,'🔵 Sidebar Ad +$0.08')">
+        <div class="ad-earn-badge">+$0.08</div>
+        <div class="ad-unit-tag">Ad · Luxury Tools</div>
+        <h4 class="ad-unit-title">Blender 3D Pro Course</h4>
+        <p class="ad-unit-sub">Master luxury 3D visualization with expert-led training. 40+ hours of content.</p>
+        <div class="ad-unit-cta">Learn More</div>
+      </div>
+      <div class="ad-unit" onclick="earn(0.06,'🟡 Sidebar Ad +$0.06')">
+        <div class="ad-earn-badge">+$0.06</div>
+        <div class="ad-unit-tag">Ad · AI Tools</div>
+        <h4 class="ad-unit-title">Midjourney Premium</h4>
+        <p class="ad-unit-sub">AI image generation for luxury designers. Create stunning visuals in seconds.</p>
+        <div class="ad-unit-cta">Explore Plans</div>
+      </div>
+      <div class="ad-unit" onclick="earn(0.10,'🟠 Sidebar Ad +$0.10')">
+        <div class="ad-earn-badge">+$0.10</div>
+        <div class="ad-unit-tag">Ad · Freelance</div>
+        <h4 class="ad-unit-title">Fiverr Business</h4>
+        <p class="ad-unit-sub">Connect with premium clients and agencies seeking luxury creative talent.</p>
+        <div class="ad-unit-cta">Join Network</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AFFILIATE TABLE -->
+<section style="background:var(--dark)">
+  <span class="sec-tag">Affiliate Program</span>
+  <h2>Affiliate <em>Partners</em> · Earn Commission</h2>
+  <div class="reveal" style="overflow-x:auto">
+    <table class="affiliate-table">
+      <thead>
+        <tr>
+          <th>Partner</th>
+          <th>Category</th>
+          <th>Commission</th>
+          <th>Cookie</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="aff-name">Canva Pro</span></td>
+          <td style="color:var(--muted)">Design Tools</td>
+          <td><span class="aff-rate">$36 per sale</span></td>
+          <td style="color:var(--muted)">30 days</td>
+          <td><span class="tag-hot">🔥 HOT</span></td>
+          <td><button class="aff-btn" onclick="earn(36,'🔗 Canva Sale +$36.00');addAffiliate(36)">Promote</button></td>
+        </tr>
+        <tr>
+          <td><span class="aff-name">Adobe Creative Cloud</span></td>
+          <td style="color:var(--muted)">Creative Suite</td>
+          <td><span class="aff-rate">85% first month</span></td>
+          <td style="color:var(--muted)">45 days</td>
+          <td><span class="tag-hot">🔥 HOT</span></td>
+          <td><button class="aff-btn" onclick="earn(52,'🔗 Adobe Sale +$52.00');addAffiliate(52)">Promote</button></td>
+        </tr>
+        <tr>
+          <td><span class="aff-name">Skillshare</span></td>
+          <td style="color:var(--muted)">Education</td>
+          <td><span class="aff-rate">$10 per trial</span></td>
+          <td style="color:var(--muted)">30 days</td>
+          <td><span class="tag-new">✨ NEW</span></td>
+          <td><button class="aff-btn" onclick="earn(10,'🔗 Skillshare +$10.00');addAffiliate(10)">Promote</button></td>
+        </tr>
+        <tr>
+          <td><span class="aff-name">Fiverr Pro</span></td>
+          <td style="color:var(--muted)">Freelance</td>
+          <td><span class="aff-rate">$150 CPA</span></td>
+          <td style="color:var(--muted)">30 days</td>
+          <td><span class="tag-new">✨ NEW</span></td>
+          <td><button class="aff-btn" onclick="earn(150,'🔗 Fiverr Sale +$150.00');addAffiliate(150)">Promote</button></td>
+        </tr>
+        <tr>
+          <td><span class="aff-name">Envato Elements</span></td>
+          <td style="color:var(--muted)">Templates</td>
+          <td><span class="aff-rate">30% recurring</span></td>
+          <td style="color:var(--muted)">90 days</td>
+          <td><span class="tag-hot">🔥 HOT</span></td>
+          <td><button class="aff-btn" onclick="earn(18,'🔗 Envato +$18.00');addAffiliate(18)">Promote</button></td>
+        </tr>
+        <tr>
+          <td><span class="aff-name">Notion Pro</span></td>
+          <td style="color:var(--muted)">Productivity</td>
+          <td><span class="aff-rate">$5 per signup</span></td>
+          <td style="color:var(--muted)">14 days</td>
+          <td style="color:var(--muted);font-size:0.6rem">Active</td>
+          <td><button class="aff-btn" onclick="earn(5,'🔗 Notion +$5.00');addAffiliate(5)">Promote</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="contact-cta reveal">
+  <h2 class="cta-h">Ready to Turn Your<br><em>Portfolio into Profit?</em></h2>
+  <p class="cta-sub">Book a premium project, subscribe to my design newsletter, or download a digital product — every interaction earns.</p>
+  <div class="cta-actions">
+    <button class="cta-btn-gold" onclick="earn(50,'📋 Inquiry Lead +$50.00');addLead()">Book a Project · +$50</button>
+    <button class="cta-btn-outline" onclick="earn(2,'📧 Newsletter Sub +$2.00')">Subscribe Newsletter · +$2</button>
+    <button class="cta-btn-outline" onclick="earn(29,'📦 Template Pack +$29.00')">Buy Template Pack · +$29</button>
+  </div>
+  <p class="cta-earning-note">
+    You've earned <strong id="ctaTotal">$0.00</strong> on this visit · 
+    Average visitor earns <strong>$0.80 – $2.40</strong> in session value
+  </p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Oussaifi Ines</span>
+  <div class="footer-links">
+    <a href="https://www.behance.net/oussaifiines" target="_blank">Behance</a>
+    <a href="https://chirp.me/ines.oussaifi" target="_blank">Chirp</a>
+    <a href="#streams">Revenue Streams</a>
+    <a href="#ads">Ad Zone</a>
+  </div>
+  <span class="footer-copy">© 2025 Oussaifi Ines · 100% Monetized Portfolio</span>
+</footer>
+
+<script>
+// ── STATE ──
+let totalEarned = 0.002; // page view
+let sessionClicks = 0;
+let totalClicks = 0;
+let totalLeads = 0;
+let affiliateRevenue = 0;
+let pageViews = 1;
+let clickEarned = 0;
+let toastTimeout;
+
+// ── CORE EARN FUNCTION ──
+function earn(amount, msg) {
+  totalEarned += amount;
+  sessionClicks++;
+  totalClicks++;
+  clickEarned += amount;
+
+  updateDashboard();
+  showToast(msg, amount);
+  spawnCoin(amount);
+
+  // Update CTA note
+  document.getElementById('ctaTotal').textContent = '$' + totalEarned.toFixed(2);
+}
+
+// ── DASHBOARD UPDATE ──
+function updateDashboard() {
+  document.getElementById('d-total').textContent = '$' + totalEarned.toFixed(2);
+  document.getElementById('d-clicks').textContent = totalClicks;
+  document.getElementById('d-leads').textContent = totalLeads;
+  document.getElementById('d-aff').textContent = '$' + affiliateRevenue.toFixed(2);
+  document.getElementById('d-views').textContent = pageViews;
+  document.getElementById('d-change').textContent = '+$' + totalEarned.toFixed(2) + ' today';
+  document.getElementById('d-cpc').textContent = totalClicks > 0 ? '$' + (totalEarned / totalClicks).toFixed(3) + ' / click avg' : '$0.05 / click avg';
+
+  // Badge
+  document.getElementById('badgeTotal').textContent = '$' + totalEarned.toFixed(2);
+  document.getElementById('sessionClicks').textContent = '+' + sessionClicks + ' clicks this session';
+}
+
+// ── ADD LEAD ──
+function addLead() {
+  totalLeads++;
+  updateDashboard();
+}
+
+// ── AFFILIATE ──
+function addAffiliate(amount) {
+  affiliateRevenue += amount;
+  updateDashboard();
+}
+
+// ── BIG CLICK BUTTON ──
+function bigClick(e) {
+  totalClicks++;
+  sessionClicks++;
+  clickEarned += 0.05;
+  totalEarned += 0.05;
+
+  // Ripple
+  const btn = document.getElementById('bigBtn');
+  const cont = document.getElementById('rippleCont');
+  const ripple = document.createElement('div');
+  ripple.className = 'ripple';
+  const rect = btn.getBoundingClientRect();
+  const x = e.clientX - rect.left - rect.width / 2;
+  const y = e.clientY - rect.top - rect.height / 2;
+  ripple.style.left = (rect.width / 2 + x) + 'px';
+  ripple.style.top = (rect.height / 2 + y) + 'px';
+  ripple.style.width = ripple.style.height = rect.width + 'px';
+  ripple.style.marginLeft = ripple.style.marginTop = (-rect.width / 2) + 'px';
+  cont.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 700);
+
+  // Counter
+  const cEl = document.getElementById('clickNum');
+  cEl.textContent = totalClicks;
+  cEl.classList.add('pop');
+  setTimeout(() => cEl.classList.remove('pop'), 150);
+  document.getElementById('clickEarn').textContent = clickEarned.toFixed(2);
+
+  // Progress
+  const milestones = [10, 25, 50, 100];
+  let prev = 0;
+  let next = 10;
+  for (let i = milestones.length - 1; i >= 0; i--) {
+    if (totalClicks >= milestones[i]) { prev = milestones[i]; next = milestones[i + 1] || milestones[i] + 50; break; }
+  }
+  const pct = Math.min(100, ((totalClicks - prev) / (next - prev)) * 100);
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progLabel').textContent = totalClicks + ' / ' + next + ' clicks';
+
+  // Milestones
+  if (totalClicks >= 10) document.getElementById('ms10').classList.add('achieved');
+  if (totalClicks >= 25) document.getElementById('ms25').classList.add('achieved');
+  if (totalClicks >= 50) document.getElementById('ms50').classList.add('achieved');
+  if (totalClicks >= 100) document.getElementById('ms100').classList.add('achieved');
+
+  updateDashboard();
+  showToast('🖱️ Click Earned +$0.05', 0.05);
+  spawnCoin(0.05);
+}
+
+// ── TOAST ──
+function showToast(msg, amount) {
+  const t = document.getElementById('toast');
+  const sign = amount >= 1 ? '💰' : amount >= 0.1 ? '✦' : '·';
+  t.innerHTML = sign + ' ' + msg;
+  t.classList.add('show');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ── COIN FLOAT ──
+function spawnCoin(amount) {
+  const coin = document.createElement('div');
+  coin.className = 'coin-float';
+  coin.textContent = amount >= 10 ? '💵' : amount >= 1 ? '💰' : '✦';
+  coin.style.left = (Math.random() * (window.innerWidth - 60) + 30) + 'px';
+  coin.style.top = (Math.random() * (window.innerHeight * 0.6) + window.innerHeight * 0.2) + 'px';
+  document.body.appendChild(coin);
+  setTimeout(() => coin.remove(), 1300);
+}
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── AUTO PASSIVE EARNINGS (simulate background impressions) ──
+setInterval(() => {
+  pageViews++;
+  totalEarned += 0.002;
+  updateDashboard();
+}, 8000);
+
+// ── INIT ──
+updateDashboard();
+</script>
+</body>
+</html>
